@@ -25,7 +25,35 @@ let initList = function() {
         );
 }
 
-initList();
+// initList();
+
+let req = new XMLHttpRequest();
+
+req.onreadystatechange = () => {
+    if (req.readyState === XMLHttpRequest.DONE) {
+        let responseJSON = JSON.parse(req.responseText);
+        todoList = responseJSON["record"];
+    }
+};
+
+req.open("GET", "https://api.jsonbin.io/v3/b/670448d6acd3cb34a892eb21/latest", true);
+// req.setRequestHeader("X-Master-Key", "<API_KEY>");
+req.send();
+
+let updateJSONbin = function() {
+    let req = new XMLHttpRequest();
+
+    req.onreadystatechange = () => {
+        if (req.readyState === XMLHttpRequest.DONE) {
+            console.log(req.responseText);
+        }
+    };
+
+    req.open("PUT", "https://api.jsonbin.io/v3/b/670448d6acd3cb34a892eb21", true);
+    req.setRequestHeader("Content-Type", "application/json");
+    // req.setRequestHeader("X-Master-Key", "<API_KEY>");
+    req.send(JSON.stringify(todoList));
+}
 
 let updateTodoList = function() {
     let todoListDiv =
@@ -65,7 +93,8 @@ setInterval(updateTodoList, 1000);
 
 let deleteTodo = function(index) {
     todoList.splice(index,1);
-    window.localStorage.setItem("todos", JSON.stringify(todoList));
+    // window.localStorage.setItem("todos", JSON.stringify(todoList));
+    updateJSONbin();
 }
 
 let addTodo = function() {
@@ -89,5 +118,6 @@ let addTodo = function() {
     };
     //add item to the list
     todoList.push(newTodo);
-    window.localStorage.setItem("todos", JSON.stringify(todoList));
+    // window.localStorage.setItem("todos", JSON.stringify(todoList));
+    updateJSONbin();
 }
