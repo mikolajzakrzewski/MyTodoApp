@@ -5,32 +5,6 @@ const binURL = "https://api.jsonbin.io/v3/b/" + binID
 
 let todoList = []; //declares a new array for Your todo list
 
-// let initList = function() {
-//     let savedList = window.localStorage.getItem("todos");
-//     if (savedList != null)
-//         todoList = JSON.parse(savedList);
-//     else
-//         todoList.push(
-//             {
-//                 title: "Learn JS",
-//                 description: "Create a demo application for my TODO's",
-//                 place: "445",
-//                 category: '',
-//                 dueDate: new Date(2024,10,16)
-//             },
-//             {
-//                 title: "Lecture test",
-//                 description: "Quick test from the first three lectures",
-//                 place: "F6",
-//                 category: '',
-//                 dueDate: new Date(2024,10,17)
-//             }
-//             // of course the lecture test mentioned above will not take place
-//         );
-// }
-//
-// initList();
-
 let req = new XMLHttpRequest();
 
 req.onreadystatechange = () => {
@@ -60,33 +34,12 @@ let updateJSONbin = function() {
 }
 
 let updateTodoList = function() {
-    // let todoListDiv =
-    //     document.getElementById("todoListView");
-    //
-    // //remove all elements
-    // while (todoListDiv.firstChild) {
-    //     todoListDiv.removeChild(todoListDiv.firstChild);
-    // }
-
-    // Create a table to contain TODO's
-    // let todoListTable = document.createElement("table");
-    // todoListDiv.appendChild(todoListTable);
-    //
-    // let todoListTableBody = document.createElement("tbody")
-    // todoListTable.appendChild(todoListTableBody);
-    //
-    // let newTableHeader = document.createElement("th");
-    // todoListTableBody.appendChild(newTableHeader);
-    //
-    // newTableHeader.appendChild(document.createTextNode("TODO:"))
-    //
-    // alternative:
     let todoTable = document.getElementById("todoTable")
-    let todoListTableBody = document.getElementById("todoTableBody")
-    let todoListTableRowNum = todoListTableBody.rows.length
+    let todoTableBody = document.getElementById("todoTableBody")
+    let todoTableRowNum = todoTableBody.rows.length
 
     // remove all table rows except the header
-    for (let i =  todoListTableRowNum - 1; i > 0; i--) {
+    for (let i =  todoTableRowNum - 1; i > 0; i--) {
         todoTable.deleteRow(i);
     }
 
@@ -98,28 +51,12 @@ let updateTodoList = function() {
             (todoList[todo].title.includes(filterInput.value)) ||
             (todoList[todo].description.includes(filterInput.value))
         ) {
-            //// List version
-            // let newElement = document.createElement("p");
-            // let newContent = document.createTextNode(todoList[todo].title + " " +
-            //     todoList[todo].description);
-            // newElement.appendChild(newContent);
-            // todoListDiv.appendChild(newElement);
-            // let newDeleteButton = document.createElement("input");
-            // newDeleteButton.type = "button";
-            // newDeleteButton.value = "x";
-            // newDeleteButton.addEventListener("click",
-            //     function() {
-            //         deleteTodo(todo);
-            //     });
-            // newElement.appendChild(newDeleteButton);
-
-            // Table version (step 5)
             let newTableRow = document.createElement("tr")
             let newContent = document.createTextNode(todoList[todo].title + " " +
                 todoList[todo].description);
 
             newTableRow.appendChild(newContent);
-            todoListTableBody.appendChild(newTableRow);
+            todoTableBody.appendChild(newTableRow);
 
             let newDeleteButton = document.createElement("input");
             newDeleteButton.type = "button";
@@ -137,8 +74,7 @@ setInterval(updateTodoList, 1000);
 
 let deleteTodo = function(index) {
     todoList.splice(index,1);
-    // Persist data
-    // window.localStorage.setItem("todos", JSON.stringify(todoList));
+
     updateJSONbin();
 }
 
@@ -148,11 +84,13 @@ let addTodo = function() {
     let inputDescription = document.getElementById("inputDescription");
     let inputPlace = document.getElementById("inputPlace");
     let inputDate = document.getElementById("inputDate");
+
     //get the values from the form
     let newTitle = inputTitle.value;
     let newDescription = inputDescription.value;
     let newPlace = inputPlace.value;
     let newDate = new Date(inputDate.value);
+
     //create new item
     let newTodo = {
         title: newTitle,
@@ -161,9 +99,9 @@ let addTodo = function() {
         category: '',
         dueDate: newDate
     };
+
     //add item to the list
     todoList.push(newTodo);
-    // Persist data
-    // window.localStorage.setItem("todos", JSON.stringify(todoList));
+
     updateJSONbin();
 }
