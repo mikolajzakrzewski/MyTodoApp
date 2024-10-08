@@ -60,25 +60,35 @@ let updateJSONbin = function() {
 }
 
 let updateTodoList = function() {
-    let todoListDiv =
-        document.getElementById("todoListView");
-
-    //remove all elements
-    while (todoListDiv.firstChild) {
-        todoListDiv.removeChild(todoListDiv.firstChild);
-    }
+    // let todoListDiv =
+    //     document.getElementById("todoListView");
+    //
+    // //remove all elements
+    // while (todoListDiv.firstChild) {
+    //     todoListDiv.removeChild(todoListDiv.firstChild);
+    // }
 
     // Create a table to contain TODO's
-    let todoListTable = document.createElement("table");
-    todoListDiv.appendChild(todoListTable);
+    // let todoListTable = document.createElement("table");
+    // todoListDiv.appendChild(todoListTable);
+    //
+    // let todoListTableBody = document.createElement("tbody")
+    // todoListTable.appendChild(todoListTableBody);
+    //
+    // let newTableHeader = document.createElement("th");
+    // todoListTableBody.appendChild(newTableHeader);
+    //
+    // newTableHeader.appendChild(document.createTextNode("TODO:"))
+    //
+    // alternative:
+    let todoTable = document.getElementById("todoTable")
+    let todoListTableBody = document.getElementById("todoTableBody")
+    let todoListTableRowNum = todoListTableBody.rows.length
 
-    let todoListTableBody = document.createElement("tbody")
-    todoListTable.appendChild(todoListTableBody);
-
-    let newTableHeader = document.createElement("th");
-    todoListTableBody.appendChild(newTableHeader);
-
-    newTableHeader.appendChild(document.createTextNode("TODO:"))
+    // remove all table rows except the header
+    for (let i =  todoListTableRowNum - 1; i > 0; i--) {
+        todoTable.deleteRow(i);
+    }
 
     //add all elements
     let filterInput = document.getElementById("inputSearch");
