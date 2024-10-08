@@ -1,30 +1,30 @@
 "use strict"
 let todoList = []; //declares a new array for Your todo list
 
-let initList = function() {
-    let savedList = window.localStorage.getItem("todos");
-    if (savedList != null)
-        todoList = JSON.parse(savedList);
-    else
-        todoList.push(
-            {
-                title: "Learn JS",
-                description: "Create a demo application for my TODO's",
-                place: "445",
-                category: '',
-                dueDate: new Date(2024,10,16)
-            },
-            {
-                title: "Lecture test",
-                description: "Quick test from the first three lectures",
-                place: "F6",
-                category: '',
-                dueDate: new Date(2024,10,17)
-            }
-            // of course the lecture test mentioned above will not take place
-        );
-}
-
+// let initList = function() {
+//     let savedList = window.localStorage.getItem("todos");
+//     if (savedList != null)
+//         todoList = JSON.parse(savedList);
+//     else
+//         todoList.push(
+//             {
+//                 title: "Learn JS",
+//                 description: "Create a demo application for my TODO's",
+//                 place: "445",
+//                 category: '',
+//                 dueDate: new Date(2024,10,16)
+//             },
+//             {
+//                 title: "Lecture test",
+//                 description: "Quick test from the first three lectures",
+//                 place: "F6",
+//                 category: '',
+//                 dueDate: new Date(2024,10,17)
+//             }
+//             // of course the lecture test mentioned above will not take place
+//         );
+// }
+//
 // initList();
 
 let req = new XMLHttpRequest();
@@ -64,6 +64,18 @@ let updateTodoList = function() {
         todoListDiv.removeChild(todoListDiv.firstChild);
     }
 
+    // Create a table to contain TODO's
+    let todoListTable = document.createElement("table");
+    todoListDiv.appendChild(todoListTable);
+
+    let todoListTableBody = document.createElement("tbody")
+    todoListTable.appendChild(todoListTableBody);
+
+    let newTableHeader = document.createElement("th");
+    todoListTableBody.appendChild(newTableHeader);
+
+    newTableHeader.appendChild(document.createTextNode("TODO:"))
+
     //add all elements
     let filterInput = document.getElementById("inputSearch");
     for (let todo in todoList) {
@@ -72,11 +84,29 @@ let updateTodoList = function() {
             (todoList[todo].title.includes(filterInput.value)) ||
             (todoList[todo].description.includes(filterInput.value))
         ) {
-            let newElement = document.createElement("p");
+            //// List version
+            // let newElement = document.createElement("p");
+            // let newContent = document.createTextNode(todoList[todo].title + " " +
+            //     todoList[todo].description);
+            // newElement.appendChild(newContent);
+            // todoListDiv.appendChild(newElement);
+            // let newDeleteButton = document.createElement("input");
+            // newDeleteButton.type = "button";
+            // newDeleteButton.value = "x";
+            // newDeleteButton.addEventListener("click",
+            //     function() {
+            //         deleteTodo(todo);
+            //     });
+            // newElement.appendChild(newDeleteButton);
+
+            // Table version (step 5)
+            let newTableRow = document.createElement("tr")
             let newContent = document.createTextNode(todoList[todo].title + " " +
                 todoList[todo].description);
-            newElement.appendChild(newContent);
-            todoListDiv.appendChild(newElement);
+
+            newTableRow.appendChild(newContent);
+            todoListTableBody.appendChild(newTableRow);
+
             let newDeleteButton = document.createElement("input");
             newDeleteButton.type = "button";
             newDeleteButton.value = "x";
@@ -84,7 +114,7 @@ let updateTodoList = function() {
                 function() {
                     deleteTodo(todo);
                 });
-            newElement.appendChild(newDeleteButton);
+            newTableRow.appendChild(newDeleteButton);
         }
     }
 }
@@ -93,6 +123,7 @@ setInterval(updateTodoList, 1000);
 
 let deleteTodo = function(index) {
     todoList.splice(index,1);
+    // Persist data
     // window.localStorage.setItem("todos", JSON.stringify(todoList));
     updateJSONbin();
 }
@@ -118,6 +149,7 @@ let addTodo = function() {
     };
     //add item to the list
     todoList.push(newTodo);
+    // Persist data
     // window.localStorage.setItem("todos", JSON.stringify(todoList));
     updateJSONbin();
 }
