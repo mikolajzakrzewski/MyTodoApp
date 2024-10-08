@@ -1,4 +1,8 @@
 "use strict"
+
+const binID = "670448d6acd3cb34a892eb21"
+const binURL = "https://api.jsonbin.io/v3/b/" + binID
+
 let todoList = []; //declares a new array for Your todo list
 
 // let initList = function() {
@@ -36,7 +40,7 @@ req.onreadystatechange = () => {
     }
 };
 
-req.open("GET", "https://api.jsonbin.io/v3/b/670448d6acd3cb34a892eb21/latest", true);
+req.open("GET", binURL + "/latest", true);
 // req.setRequestHeader("X-Master-Key", "<API_KEY>");
 req.send();
 
@@ -49,7 +53,7 @@ let updateJSONbin = function() {
         }
     };
 
-    req.open("PUT", "https://api.jsonbin.io/v3/b/670448d6acd3cb34a892eb21", true);
+    req.open("PUT", binURL, true);
     req.setRequestHeader("Content-Type", "application/json");
     // req.setRequestHeader("X-Master-Key", "<API_KEY>");
     req.send(JSON.stringify(todoList));
