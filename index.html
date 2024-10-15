@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet"
+        type="text/css" href="theme.css">
+  <script src="scripts.js"></script>
+  <title>MyTODO App</title>
+</head>
+<body>
+<h1>MyNotes</h1>
+<table id="todoTable">
+  <tbody id="todoTableBody">
+    <tr>
+      <th>TODO:</th>
+    </tr>
+  </tbody>
+</table>
+<div>
+  <label>Search</label>
+  <input type="text" id="inputSearch" placeholder="Type Your seach here...">
+</div>
+<form>
+  <label>Title</label>
+  <input type="text" id="inputTitle">
+  <label>Description</label>
+  <input type="text" id="inputDescription">
+  <label>Place</label>
+  <input type="text" id="inputPlace">
+  <label>Due date</label>
+  <input type="date" id="inputDate">
+  <input type="button" value="add"
+         onclick="addTodo()">
+</form>
+</body>
+</html>
