@@ -44,29 +44,32 @@ let updateTodoList = function() {
     }
 
     //add all elements
-    let filterInput = document.getElementById("inputSearch");
-    for (let todo in todoList) {
-        if (
-            (filterInput.value === "") ||
-            (todoList[todo].title.includes(filterInput.value)) ||
-            (todoList[todo].description.includes(filterInput.value))
-        ) {
-            let newTableRow = document.createElement("tr")
-            let newContent = document.createTextNode(todoList[todo].title + " " +
-                todoList[todo].description);
+    let filterInputName = document.getElementById("filterName");
+    let filterInputStartDate = document.getElementById("filterStartDate");
+    let filterInputEndDate = document.getElementById("filterEndDate");
 
-            newTableRow.appendChild(newContent);
-            todoTableBody.appendChild(newTableRow);
+    let filteredTodoList = todoList.filter(item =>
+        (filterInputName.value === "" || item.title.includes(filterInputName.value) || item.description.includes(filterInputName.value))
+        && (item.dueDate > filterInputStartDate.value || filterInputStartDate.value === "")
+        && (item.dueDate < filterInputEndDate.value || filterInputEndDate.value === "")
+    )
 
-            let newDeleteButton = document.createElement("input");
-            newDeleteButton.type = "button";
-            newDeleteButton.value = "x";
-            newDeleteButton.addEventListener("click",
-                function() {
-                    deleteTodo(todo);
-                });
-            newTableRow.appendChild(newDeleteButton);
-        }
+    for (let todo in filteredTodoList) {
+        let newTableRow = document.createElement("tr")
+        let newContent = document.createTextNode(todoList[todo].title + " " +
+            todoList[todo].description);
+
+        newTableRow.appendChild(newContent);
+        todoTableBody.appendChild(newTableRow);
+
+        let newDeleteButton = document.createElement("input");
+        newDeleteButton.type = "button";
+        newDeleteButton.value = "x";
+        newDeleteButton.addEventListener("click",
+            function() {
+                deleteTodo(todo);
+            });
+        newTableRow.appendChild(newDeleteButton);
     }
 }
 
