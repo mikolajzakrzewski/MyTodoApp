@@ -1,0 +1,58 @@
+/* Dark Theme */
+.table {
+    table-layout: fixed; /* Ensures equal width for all columns */
+    width: 100%; /* Full width of the table */
+    border-radius: 10px; /* Add rounded corners */
+    overflow: hidden; /* Keep rounded corners */
+}
+
+.table th, .table td {
+    text-align: center; /* Center text in columns */
+    padding: 15px; /* Add padding to cells for better spacing */
+}
+
+.dark-theme {
+    background-color: #343a40; /* Dark background */
+    color: #f8f9fa; /* Light text */
+}
+
+.dark-theme .table {
+    background-color: #454d55;
+    color: #fff;
+}
+.dark-theme label {
+    color: #fff;
+}
+.dark-theme input,
+
+.dark-theme button {
+    color: #5a6268;
+    border-color: #5a6268;
+}
+
+.dark-theme .navbar {
+    background-color: #000000; /* Light text for links in navbar */
+}
+
+/* Light Theme (default) */
+.light-theme {
+    background-color: #85B8FF; /* Light background */
+    color: #000000; /* Dark text */
+}
+
+.light-theme .table {
+    background-color: 	#E9F2FF;
+    border-color: #ccc;
+    color: #000;
+}
+
+.light-theme input,
+.light-theme label,
+.light-theme button {
+    color: #000000;
+    border-color: #ccc;
+}
+
+.light-theme .navbar a {
+    color: #000; /* Dark text for links in navbar */
+}

@@ -34,44 +34,66 @@ let updateJSONbin = function() {
 }
 
 let updateTodoList = function() {
-    let todoTable = document.getElementById("todoTable")
-    let todoTableBody = document.getElementById("todoTableBody")
-    let todoTableRowNum = todoTableBody.rows.length
+    let todoTableBody = document.getElementById("todoTableBody");
 
-    // remove all table rows except the header
-    for (let i =  todoTableRowNum - 1; i > 0; i--) {
-        todoTable.deleteRow(i);
+    // Clear existing rows
+    todoTableBody.innerHTML = "";
+
+    if (todoList.length === 0) {
+        let emptyRow = document.createElement("tr");
+        let emptyCell = document.createElement("td");
+        emptyCell.colSpan = 5;
+        emptyCell.textContent = "You can chill";
+        emptyRow.appendChild(emptyCell);
+        todoTableBody.appendChild(emptyRow);
+        return;
     }
 
-    //add all elements
-    let filterInputName = document.getElementById("filterName");
-    let filterInputStartDate = document.getElementById("filterStartDate");
-    let filterInputEndDate = document.getElementById("filterEndDate");
+    // Filter the todo list (if needed)
+    let filterInputName = document.getElementById("filterName").value;
+    let filterInputStartDate = document.getElementById("filterStartDate").value;
+    let filterInputEndDate = document.getElementById("filterEndDate").value;
 
     let filteredTodoList = todoList.filter(item =>
-        (filterInputName.value === "" || item.title.includes(filterInputName.value) || item.description.includes(filterInputName.value))
-        && (item.dueDate > filterInputStartDate.value || filterInputStartDate.value === "")
-        && (item.dueDate < filterInputEndDate.value || filterInputEndDate.value === "")
-    )
+        (filterInputName === "" || item.title.includes(filterInputName) || item.description.includes(filterInputName))
+        && (item.dueDate > filterInputStartDate || filterInputStartDate === "")
+        && (item.dueDate < filterInputEndDate || filterInputEndDate === "")
+    );
 
-    for (let todo in filteredTodoList) {
-        let newTableRow = document.createElement("tr")
-        let newContent = document.createTextNode(todoList[todo].title + " " +
-            todoList[todo].description);
+    // Add rows for each todo item
+    filteredTodoList.forEach((todo, index) => {
+        let newTableRow = document.createElement("tr");
 
-        newTableRow.appendChild(newContent);
+        // Create and append individual table cells for title, description, place, due date
+        let titleCell = document.createElement("td");
+        titleCell.textContent = todo.title;
+        newTableRow.appendChild(titleCell);
+
+        let descriptionCell = document.createElement("td");
+        descriptionCell.textContent = todo.description;
+        newTableRow.appendChild(descriptionCell);
+
+        let placeCell = document.createElement("td");
+        placeCell.textContent = todo.place;
+        newTableRow.appendChild(placeCell);
+
+        let dueDateCell = document.createElement("td");
+        dueDateCell.textContent = new Date(todo.dueDate).toLocaleDateString();
+        newTableRow.appendChild(dueDateCell);
+
+        // Action cell (delete button)
+        let actionCell = document.createElement("td");
+        let deleteButton = document.createElement("input");
+        deleteButton.type = "button";
+        deleteButton.value = "x";
+        deleteButton.addEventListener("click", () => deleteTodo(index));
+        actionCell.appendChild(deleteButton);
+        newTableRow.appendChild(actionCell);
+
+        // Append row to the table body
         todoTableBody.appendChild(newTableRow);
-
-        let newDeleteButton = document.createElement("input");
-        newDeleteButton.type = "button";
-        newDeleteButton.value = "x";
-        newDeleteButton.addEventListener("click",
-            function() {
-                deleteTodo(todo);
-            });
-        newTableRow.appendChild(newDeleteButton);
-    }
-}
+    });
+};
 
 setInterval(updateTodoList, 1000);
 
@@ -79,6 +101,7 @@ let deleteTodo = function(index) {
     todoList.splice(index,1);
 
     updateJSONbin();
+    
 }
 
 let addTodo = function() {
@@ -108,3 +131,29 @@ let addTodo = function() {
 
     updateJSONbin();
 }
+
+const switchElement = document.getElementById('darkModeSwitch');
+    const body = document.body;
+
+    // Load saved theme
+    if (localStorage.getItem('theme') === 'dark') {
+        body.classList.add('dark-theme');
+        body.classList.remove('light-theme');
+        switchElement.checked = true;
+    } else {
+        body.classList.add('light-theme');
+        body.classList.remove('dark-theme');
+    }
+
+    // Listen for toggle switch changes
+    switchElement.addEventListener('change', () => {
+        if (switchElement.checked) {
+            body.classList.add('dark-theme');
+            body.classList.remove('light-theme');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            body.classList.add('light-theme');
+            body.classList.remove('dark-theme');
+            localStorage.setItem('theme', 'light');
+        }
+    });
