@@ -81,11 +81,11 @@ let updateTodoList = function() {
         dueDateCell.textContent = new Date(todo.dueDate).toLocaleDateString();
         newTableRow.appendChild(dueDateCell);
 
-        // Action cell (delete button)
+        // Komórka akcji (przycisk usuwania)
         let actionCell = document.createElement("td");
-        let deleteButton = document.createElement("input");
-        deleteButton.type = "button";
-        deleteButton.value = "x";
+        let deleteButton = document.createElement("button");
+        deleteButton.className = "btn btn-danger btn-sm"; // Klasy Bootstrap
+        deleteButton.textContent = "Delete";
         deleteButton.addEventListener("click", () => deleteTodo(index));
         actionCell.appendChild(deleteButton);
         newTableRow.appendChild(actionCell);

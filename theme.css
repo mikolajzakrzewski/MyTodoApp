@@ -5,54 +5,119 @@
     border-radius: 10px; /* Add rounded corners */
     overflow: hidden; /* Keep rounded corners */
 }
-
+.date-filter {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align to the left */
+  }
+  
+  .date-filter input {
+    width: 150px; /* Adjust width as necessary */
+    margin-bottom: 8px; /* Adds space between inputs */
+  }
+  
 .table th, .table td {
     text-align: center; /* Center text in columns */
     padding: 15px; /* Add padding to cells for better spacing */
 }
 
+.table-responsive {
+    border-radius: 10px; /* Dodaj zaokrąglenie do kontenera */
+    overflow: hidden; /* Ukryj elementy wychodzące poza obramowanie */
+}
+
+
+
+
+
+
 .dark-theme {
-    background-color: #343a40; /* Dark background */
-    color: #f8f9fa; /* Light text */
+    background-color: #121212; /* Dark background */
+    color: #9719ff; /* Light text */
 }
 
 .dark-theme .table {
-    background-color: #454d55;
-    color: #fff;
+    background-color: #282828 ;
+    border-color: #121212;
+    color: #8a8a8a;
+    border: 3px solid #121212;
+    border-radius: 10px !important;
+    overflow: hidden;
 }
+
+.dark-theme .table th,
+.dark-theme .table td {
+    border-radius: 10px !important;
+    border: 3px solid #121212 !important; /* Kolor obramowania komórek */
+}
+
 .dark-theme label {
-    color: #fff;
+    color: #9719ff;
 }
-.dark-theme input,
+
 
 .dark-theme button {
-    color: #5a6268;
-    border-color: #5a6268;
+    color: #000000;
+    border: 1px solid ;
+    background-color: #9719ff;
 }
 
+
 .dark-theme .navbar {
-    background-color: #000000; /* Light text for links in navbar */
+    color:#000;
+    background-color: #282828 !important; /* Light text for links in navbar */
 }
+
+.dark-theme input[type="text"], 
+.dark-theme input[type="date"],
+.dark-theme input[type="number"] {
+    background-color: #282828 ;
+    color: #8a8a8a;
+    border: 1px solid #121212;
+}
+
+.dark-theme #filterName {
+    background-color: #282828; /* Kolor tła */
+    color: #8a8a8a; /* Kolor tekstu */
+    border: 2px solid #121212; /* Kolor obramowania */
+}
+
+.dark-theme .btn-primary {
+    background-color: #9719ff;
+    color: #000000;
+    border: none;
+}
+
+
+
+
+
+
+
+
 
 /* Light Theme (default) */
 .light-theme {
-    background-color: #85B8FF; /* Light background */
+    background-color: #ffffff; /* Light background */
     color: #000000; /* Dark text */
 }
 
 .light-theme .table {
-    background-color: 	#E9F2FF;
+    background-color: 	#898F9C;
     border-color: #ccc;
     color: #000;
 }
 
-.light-theme input,
-.light-theme label,
-.light-theme button {
-    color: #000000;
-    border-color: #ccc;
+
+
+.light-theme input[type="text"], 
+.light-theme input[type="date"],
+.light-theme input[type="number"] {
+    background-color: #898F9C;
 }
 
-.light-theme .navbar a {
+.light-theme .navbar  {
     color: #000; /* Dark text for links in navbar */
+    background-color: #3b5998 !important;
 }
+
