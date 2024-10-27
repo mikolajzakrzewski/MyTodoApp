@@ -1,0 +1,131 @@
+/*====================GLOBAL==================*/
+.table {
+    table-layout: fixed; 
+    width: 100%; 
+    border-radius: 10px; 
+    overflow: hidden; 
+}
+
+.date-filter {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+}
+  
+.date-filter input {
+    width: 150px;
+    margin-bottom: 8px; 
+}
+  
+.table th, .table td {
+    text-align: center; 
+    padding: 15px;
+}
+
+.table-responsive {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+@media (max-width: 600px) {
+    .custom-control.custom-switch,
+    #navbarSearchForm { 
+        display: none !important;
+    }
+}
+
+
+
+/*===================DARK THEME====================*/
+
+.dark-theme {
+    background-color: #121212; 
+    color: #9719ff;
+}
+
+.dark-theme .table {
+    background-color: #282828 ;
+    border-color: #121212;
+    color: #8a8a8a;
+    border: 3px solid #121212;
+    border-radius: 10px !important;
+    overflow: hidden;
+}
+
+.dark-theme .table th,
+.dark-theme .table td {
+    border-radius: 10px !important;
+    background-color: #282828;
+    border: 3px solid #121212 !important; 
+}
+
+.dark-theme label {
+    color: #9719ff;
+}
+
+
+.dark-theme button {
+    color: #000000;
+    border: 1px solid ;
+    background-color: #9719ff;
+}
+
+
+.dark-theme .navbar {
+    color:#000;
+    background-color: #282828 !important; 
+}
+
+.dark-theme input[type="text"], 
+.dark-theme input[type="date"],
+.dark-theme input[type="number"] {
+    background-color: #282828 ;
+    color: #8a8a8a;
+    border: 1px solid #121212;
+}
+
+.dark-theme #filterName {
+    background-color: #282828; 
+    color: #8a8a8a; 
+    border: 2px solid #121212;
+}
+
+.dark-theme .btn-primary {
+    background-color: #9719ff;
+    color: #000000;
+    border: none;
+}
+
+.dark-theme .modal-content {
+    background-color: #282828;
+    color: #8a8a8a;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    text-align: center;
+}
+
+
+/*==================LIGHT THEME============*/
+
+.light-theme {
+    background-color: #ffffff; 
+    color: #000000;
+}
+
+.light-theme .table {
+    background-color: 	#898F9C;
+    border-color: #ccc;
+    color: #000;
+}
+
+.light-theme input[type="text"], 
+.light-theme input[type="date"],
+.light-theme input[type="number"] {
+    background-color: #898F9C;
+}
+
+.light-theme .navbar  {
+    color: #000;
+    background-color: #3b5998 !important;
+}
+

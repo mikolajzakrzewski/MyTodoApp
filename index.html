@@ -2,35 +2,107 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet"
-        type="text/css" href="theme.css">
-  <script src="scripts.js"></script>
+  <link rel="stylesheet" type="text/css" href="theme.css">
+  <script src="config.js" defer></script>
+  <script src="scripts.js" defer></script>
   <title>MyTODO App</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<h1>MyNotes</h1>
-<table id="todoTable">
-  <tbody id="todoTableBody">
-    <tr>
-      <th>TODO:</th>
-    </tr>
-  </tbody>
-</table>
-<div>
-  <label>Search</label>
-  <input type="text" id="inputSearch" placeholder="Type Your seach here...">
-</div>
-<form>
-  <label>Title</label>
-  <input type="text" id="inputTitle">
-  <label>Description</label>
-  <input type="text" id="inputDescription">
-  <label>Place</label>
-  <input type="text" id="inputPlace">
-  <label>Due date</label>
-  <input type="date" id="inputDate">
-  <input type="button" value="add"
-         onclick="addTodo()">
-</form>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">MyTODO App</a>
+
+    <ul class="navbar-nav mr-auto">
+        <!-- Empty nav items if needed in the future -->
+    </ul>
+
+    <!-- Dark Mode Switch in navbar, aligned to the left of the search bar -->
+    <div class="custom-control custom-switch mr-3">
+        <input type="checkbox" class="custom-control-input" id="darkModeSwitch" aria-label="Toggle dark mode">
+        <label class="custom-control-label" for="darkModeSwitch">Dark Mode</label>
+    </div>
+
+    <!-- Search form in navbar -->
+    <form class="form-inline my-2 my-lg-0" >
+        <input class="form-control mr-sm-2" id="filterName" type="search" placeholder="Search Todos" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="updateTodoList()" aria-label="Search Todos">Search</button>
+    </form>
+  </nav>
+
+  <div class="container mt-4">
+    <h1 class="text-center my-4">MyTODO</h1>
+
+    <!-- Date Filter Section -->
+    <div class="form-group mb-3">
+      <label for="filterStartDate">Due date range</label>
+      <div class="date-filter">
+        <input type="date" id="filterStartDate" class="form-control mb-2" aria-label="Start date">
+        <input type="date" id="filterEndDate" class="form-control" aria-label="End date">
+      </div>
+    </div>
+    
+    <!-- TODO Table -->
+    <div class="table-responsive">
+      <table id="todoTable" class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Place</th>
+            <th>Due Date</th>
+            <th>Category</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="todoTableBody">
+          <tr>
+            <td colspan="6" class="text-center">You can chill</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Add TODO Form -->
+    <form class="mb-3">
+      <div class="form-row">
+        <div class="col">
+          <label for="inputTitle">Title</label>
+          <input type="text" id="inputTitle" class="form-control" aria-label="Todo title">
+        </div>
+        <div class="col">
+          <label for="inputDescription">Description</label>
+          <input type="text" id="inputDescription" class="form-control" aria-label="Todo description">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <label for="inputPlace">Place</label>
+          <input type="text" id="inputPlace" class="form-control" aria-label="Todo place">
+        </div>
+        <div class="col">
+          <label for="inputDate">Due date</label>
+          <input type="date" id="inputDate" class="form-control" aria-label="Todo due date">
+        </div>
+      </div>
+      <input type="button" value="Add" class="btn btn-primary mt-3" onclick="addTodo()" aria-label="Add Todo">
+    </form>
+  </div>
+  
+  <!-- Modal for Error -->
+  <div class="modal fade" id="errorModal" tabindex="-1" aria-hidden="true" aria-labelledby="errorModalLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center p-4">
+            <h5 id="errorModalLabel" class="mb-3">Error</h5>
+            <p>Title and description cannot be empty. Please provide at least one.</p>
+            <button type="button" class="btn btn-secondary mt-3" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap and jQuery (optional for certain Bootstrap features) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

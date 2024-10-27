@@ -1,3 +1,9 @@
+### Environment files ###
+.env
+
+### js config ###
+config.js
+
 ### JetBrains ###
 .idea/
 
