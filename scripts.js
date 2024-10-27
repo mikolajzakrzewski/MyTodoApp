@@ -1,7 +1,7 @@
 "use strict"
 
 
-const binID = "670448d6acd3cb34a892eb21"
+const binID = "671e3527ad19ca34f8bf6509"
 const binURL = "https://api.jsonbin.io/v3/b/" + binID
 
 let todoList = []; //declares a new array for Your todo list
@@ -10,13 +10,23 @@ let req = new XMLHttpRequest();
 
 req.onreadystatechange = () => {
     if (req.readyState === XMLHttpRequest.DONE) {
-        let responseJSON = JSON.parse(req.responseText);
-        todoList = responseJSON["record"];
+        try {
+            let responseJSON = JSON.parse(req.responseText);
+            // Only update todoList if the fetched data is a non-empty array
+            if (Array.isArray(responseJSON["record"])) {
+                // Filter out items with empty title and description
+                todoList = responseJSON["record"].filter(item => item.title || item.description);
+            } else {
+                console.log("Fetched data is not an array. Skipping update.");
+            }
+        } catch (error) {
+            console.error("Error parsing JSON response:", error);
+            todoList = []; // Fallback to an empty array if parsing fails
+        }
     }
 };
-
 req.open("GET", binURL + "/latest", true);
-// req.setRequestHeader("X-Master-Key", "<API_KEY>");
+req.setRequestHeader("X-Master-Key", X_MASTER_KEY);
 req.send();
 
 let updateJSONbin = function() {
@@ -28,10 +38,20 @@ let updateJSONbin = function() {
         }
     };
 
+    
+
     req.open("PUT", binURL, true);
     req.setRequestHeader("Content-Type", "application/json");
-    // req.setRequestHeader("X-Master-Key", "<API_KEY>");
-    req.send(JSON.stringify(todoList.length > 0 ? todoList : []));
+    req.setRequestHeader("X-Master-Key", X_MASTER_KEY);
+    const dataToSend = todoList.length > 0 ? todoList : [{
+        title: "",
+        description: "",
+        place: "",
+        category: "",
+        dueDate: ""
+    }];
+
+    req.send(JSON.stringify(dataToSend));
 }
 
 let updateTodoList = function() {
@@ -115,6 +135,14 @@ let addTodo = async function() {
     let inputDescription = document.getElementById("inputDescription");
     let inputPlace = document.getElementById("inputPlace");
     let inputDate = document.getElementById("inputDate");
+
+
+    if (!inputTitle.value.trim() && !inputDescription.value.trim()) {
+        // Show Bootstrap modal if both fields are empty
+        let errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+        errorModal.show();
+        return; // Exit the function to prevent adding an empty task
+    }
 
     let category = await categorizeTask(inputTitle.value, inputDescription.value);
     //get the values from the form
@@ -207,5 +235,4 @@ const switchElement = document.getElementById('darkModeSwitch');
             return "Others"; // Default category in case of error
         }
     }
-    
     

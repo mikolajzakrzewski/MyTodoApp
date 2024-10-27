@@ -1,37 +1,46 @@
-/* Dark Theme */
+/*====================GLOBAL==================*/
 .table {
-    table-layout: fixed; /* Ensures equal width for all columns */
-    width: 100%; /* Full width of the table */
-    border-radius: 10px; /* Add rounded corners */
-    overflow: hidden; /* Keep rounded corners */
+    table-layout: fixed; 
+    width: 100%; 
+    border-radius: 10px; 
+    overflow: hidden; 
 }
+
 .date-filter {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Align to the left */
-  }
+    align-items: flex-start; 
+}
   
-  .date-filter input {
-    width: 150px; /* Adjust width as necessary */
-    margin-bottom: 8px; /* Adds space between inputs */
-  }
+.date-filter input {
+    width: 150px;
+    margin-bottom: 8px; 
+}
   
 .table th, .table td {
-    text-align: center; /* Center text in columns */
-    padding: 15px; /* Add padding to cells for better spacing */
+    text-align: center; 
+    padding: 15px;
 }
 
 .table-responsive {
-    border-radius: 10px; /* Dodaj zaokrąglenie do kontenera */
-    overflow: hidden; /* Ukryj elementy wychodzące poza obramowanie */
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+@media (max-width: 600px) {
+    .custom-control.custom-switch,
+    #navbarSearchForm { 
+        display: none !important;
+    }
 }
 
 
 
+/*===================DARK THEME====================*/
 
 .dark-theme {
-    background-color: #121212; /* Dark background */
-    color: #9719ff; /* Light text */
+    background-color: #121212; 
+    color: #9719ff;
 }
 
 .dark-theme .table {
@@ -46,7 +55,8 @@
 .dark-theme .table th,
 .dark-theme .table td {
     border-radius: 10px !important;
-    border: 3px solid #121212 !important; /* Kolor obramowania komórek */
+    background-color: #282828;
+    border: 3px solid #121212 !important; 
 }
 
 .dark-theme label {
@@ -63,7 +73,7 @@
 
 .dark-theme .navbar {
     color:#000;
-    background-color: #282828 !important; /* Light text for links in navbar */
+    background-color: #282828 !important; 
 }
 
 .dark-theme input[type="text"], 
@@ -75,9 +85,9 @@
 }
 
 .dark-theme #filterName {
-    background-color: #282828; /* Kolor tła */
-    color: #8a8a8a; /* Kolor tekstu */
-    border: 2px solid #121212; /* Kolor obramowania */
+    background-color: #282828; 
+    color: #8a8a8a; 
+    border: 2px solid #121212;
 }
 
 .dark-theme .btn-primary {
@@ -86,18 +96,20 @@
     border: none;
 }
 
+.dark-theme .modal-content {
+    background-color: #282828;
+    color: #8a8a8a;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    text-align: center;
+}
 
 
+/*==================LIGHT THEME============*/
 
-
-
-
-
-
-/* Light Theme (default) */
 .light-theme {
-    background-color: #ffffff; /* Light background */
-    color: #000000; /* Dark text */
+    background-color: #ffffff; 
+    color: #000000;
 }
 
 .light-theme .table {
@@ -106,8 +118,6 @@
     color: #000;
 }
 
-
-
 .light-theme input[type="text"], 
 .light-theme input[type="date"],
 .light-theme input[type="number"] {
@@ -115,7 +125,7 @@
 }
 
 .light-theme .navbar  {
-    color: #000; /* Dark text for links in navbar */
+    color: #000;
     background-color: #3b5998 !important;
 }
 
