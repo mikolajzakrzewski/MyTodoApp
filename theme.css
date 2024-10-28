@@ -29,7 +29,7 @@
 
 @media (max-width: 600px) {
     .custom-control.custom-switch,
-    #navbarSearchForm { 
+    #navBarSearchForm { 
         display: none !important;
     }
 }
