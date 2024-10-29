@@ -18,14 +18,14 @@
 
     <!-- Dark Mode Switch in navbar, aligned to the left of the search bar -->
     <div class="custom-control custom-switch mr-3">
-        <input type="checkbox" class="custom-control-input" id="darkModeSwitch" aria-label="Toggle dark mode">
+        <input type="checkbox" class="custom-control-input" id="darkModeSwitch" >
         <label class="custom-control-label" for="darkModeSwitch">Dark Mode</label>
     </div>
 
     <!-- Search form in navbar -->
     <form class="form-inline my-2" id="navBarSearchForm">
-        <input class="form-control mr-sm-2" id="filterName" type="search" placeholder="Search Todos" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="updateTodoList()" aria-label="Search Todos">Search</button>
+        <input class="form-control mr-sm-2" id="filterName" type="search" placeholder="Search Todos" >
+        <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="updateTodoList()" >Search</button>
     </form>
   </nav>
 
@@ -36,8 +36,8 @@
     <div class="form-group mb-3">
       <label for="filterStartDate">Due date range</label>
       <div class="date-filter">
-        <input type="date" id="filterStartDate" class="form-control mb-2" aria-label="Start date">
-        <input type="date" id="filterEndDate" class="form-control" aria-label="End date">
+        <input type="date" id="filterStartDate" class="form-control mb-2" >
+        <input type="date" id="filterEndDate" class="form-control" >
       </div>
     </div>
     
@@ -67,29 +67,29 @@
       <div class="form-row">
         <div class="col">
           <label for="inputTitle">Title</label>
-          <input type="text" id="inputTitle" class="form-control" aria-label="Todo title">
+          <input type="text" id="inputTitle" class="form-control" >
         </div>
         <div class="col">
           <label for="inputDescription">Description</label>
-          <input type="text" id="inputDescription" class="form-control" aria-label="Todo description">
+          <input type="text" id="inputDescription" class="form-control">
         </div>
       </div>
       <div class="form-row">
         <div class="col">
           <label for="inputPlace">Place</label>
-          <input type="text" id="inputPlace" class="form-control" aria-label="Todo place">
+          <input type="text" id="inputPlace" class="form-control">
         </div>
         <div class="col">
           <label for="inputDate">Due date</label>
-          <input type="date" id="inputDate" class="form-control" aria-label="Todo due date">
+          <input type="date" id="inputDate" class="form-control">
         </div>
       </div>
-      <input type="button" value="Add" class="btn btn-primary mt-3" onclick="addTodo()" aria-label="Add Todo">
+      <input type="button" value="Add" class="btn btn-primary mt-3" onclick="addTodo()">
     </form>
   </div>
   
   <!-- Modal for Error -->
-  <div class="modal fade" id="errorModal" tabindex="-1" aria-hidden="true" aria-labelledby="errorModalLabel">
+  <div class="modal fade" id="errorModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content text-center p-4">
             <h5 id="errorModalLabel" class="mb-3">Error</h5>
