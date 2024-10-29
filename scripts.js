@@ -209,7 +209,7 @@ const switchElement = document.getElementById('darkModeSwitch');
     
             const data = await response.json();
     
-            if (data.choices && data.choices[0]?.message?.content) {
+            if (data.choices[0].message.content) {
                 return data.choices[0].message.content.trim();
             } else {
                 console.error("Unexpected API response structure:", data);
