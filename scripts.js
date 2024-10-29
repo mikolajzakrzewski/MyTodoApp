@@ -4,7 +4,7 @@
 const binID = "671e3527ad19ca34f8bf6509"
 const binURL = "https://api.jsonbin.io/v3/b/" + binID
 
-let todoList = []; //declares a new array for Your todo list
+let todoList = [];
 
 let req = new XMLHttpRequest();
 
@@ -12,16 +12,14 @@ req.onreadystatechange = () => {
     if (req.readyState === XMLHttpRequest.DONE) {
         try {
             let responseJSON = JSON.parse(req.responseText);
-            // Only update todoList if the fetched data is a non-empty array
             if (Array.isArray(responseJSON["record"])) {
-                // Filter out items with empty title and description
                 todoList = responseJSON["record"].filter(item => item.title || item.description);
             } else {
                 console.log("Fetched data is not an array. Skipping update.");
             }
         } catch (error) {
             console.error("Error parsing JSON response:", error);
-            todoList = []; // Fallback to an empty array if parsing fails
+            todoList = [];
         }
     }
 };
@@ -57,7 +55,6 @@ let updateJSONbin = function() {
 let updateTodoList = function() {
     let todoTableBody = document.getElementById("todoTableBody");
 
-    // Clear existing rows
     todoTableBody.innerHTML = "";
 
     if (todoList.length === 0) {
@@ -70,7 +67,6 @@ let updateTodoList = function() {
         return;
     }
 
-    // Filter the todo list (if needed)
     let filterInputName = document.getElementById("filterName").value;
     let filterInputStartDate = document.getElementById("filterStartDate").value;
     let filterInputEndDate = document.getElementById("filterEndDate").value;
@@ -85,7 +81,6 @@ let updateTodoList = function() {
     filteredTodoList.forEach((todo, index) => {
         let newTableRow = document.createElement("tr");
 
-        // Create and append individual table cells for title, description, place, due date
         let titleCell = document.createElement("td");
         titleCell.textContent = todo.title;
         newTableRow.appendChild(titleCell);
@@ -106,16 +101,14 @@ let updateTodoList = function() {
         categoryCell.textContent = todo.category || "others";
         newTableRow.appendChild(categoryCell);
 
-        // Komórka akcji (przycisk usuwania)
         let actionCell = document.createElement("td");
         let deleteButton = document.createElement("button");
-        deleteButton.className = "btn btn-danger btn-sm"; // Klasy Bootstrap
+        deleteButton.className = "btn btn-danger btn-sm";
         deleteButton.textContent = "Delete";
         deleteButton.addEventListener("click", () => deleteTodo(index));
         actionCell.appendChild(deleteButton);
         newTableRow.appendChild(actionCell);
 
-        // Append row to the table body
         todoTableBody.appendChild(newTableRow);
     });
 };
@@ -130,7 +123,6 @@ let deleteTodo = function(index) {
 }
 
 let addTodo = async function() {
-    //get the elements in the form
     let inputTitle = document.getElementById("inputTitle");
     let inputDescription = document.getElementById("inputDescription");
     let inputPlace = document.getElementById("inputPlace");
@@ -138,20 +130,17 @@ let addTodo = async function() {
 
 
     if (!inputTitle.value.trim() && !inputDescription.value.trim()) {
-        // Show Bootstrap modal if both fields are empty
         let errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
         errorModal.show();
-        return; // Exit the function to prevent adding an empty task
+        return;
     }
 
     let category = await categorizeTask(inputTitle.value, inputDescription.value);
-    //get the values from the form
     let newTitle = inputTitle.value;
     let newDescription = inputDescription.value;
     let newPlace = inputPlace.value;
     let newDate = new Date(inputDate.value);
 
-    //create new item
     let newTodo = {
         title: newTitle,
         description: newDescription,
@@ -160,7 +149,6 @@ let addTodo = async function() {
         dueDate: newDate
     };
 
-    //add item to the list
     todoList.push(newTodo);
 
     updateJSONbin();
@@ -169,7 +157,6 @@ let addTodo = async function() {
 const switchElement = document.getElementById('darkModeSwitch');
     const body = document.body;
 
-    // Load saved theme
     if (localStorage.getItem('theme') === 'dark') {
         body.classList.add('dark-theme');
         body.classList.remove('light-theme');
@@ -179,7 +166,6 @@ const switchElement = document.getElementById('darkModeSwitch');
         body.classList.remove('dark-theme');
     }
 
-    // Listen for toggle switch changes
     switchElement.addEventListener('change', () => {
         if (switchElement.checked) {
             body.classList.add('dark-theme');
@@ -193,7 +179,6 @@ const switchElement = document.getElementById('darkModeSwitch');
     });
 
     async function categorizeTask(title, description) {
-        // Default description if none is provided
         const validDescription = description || "No additional details provided.";
     
         const messages = [
@@ -228,11 +213,11 @@ const switchElement = document.getElementById('darkModeSwitch');
                 return data.choices[0].message.content.trim();
             } else {
                 console.error("Unexpected API response structure:", data);
-                return "Others"; // Default category in case of unexpected response structure
+                return "Others"; 
             }
         } catch (error) {
             console.error("Error categorizing task:", error);
-            return "Others"; // Default category in case of error
+            return "Others";
         }
     }
     
